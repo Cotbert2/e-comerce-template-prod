@@ -1,0 +1,16 @@
+#auth services
+    log in
+    log out
+    sign up
+
+#profiles
+    costumer profile
+    admin profile
+
+
+#actions for admin
+    add provider
+    get all providers
+
+#actions for costumer
+    get all products

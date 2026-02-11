@@ -1,0 +1,24 @@
+.panel-input{
+    width: 40%;
+    /*center all elements inside panel=input*/
+
+
+
+    h3{
+        text-align: center;
+    }
+    p-floatlabel {
+        input{
+            width: 90%;
+        }
+
+        width: 100%;
+        margin: 2rem;
+    }
+}
+
+.full-container{
+    height: 100vh;
+    background-image: url('./../../../public/login-wallpaper.jpg');
+    background-size: cover;
+}

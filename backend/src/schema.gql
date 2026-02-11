@@ -1,0 +1,205 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type City {
+  id: String
+  name: String
+}
+
+type State {
+  id: String
+  name: String
+  cities: [City!]
+}
+
+type Country {
+  id: String
+  name: String
+  states: [State!]
+}
+
+type Category {
+  id: String
+  name: String
+  description: String
+}
+
+type Provider {
+  id: String
+  name: String
+  email: String
+  phone: String
+  description: String
+  country: String
+}
+
+type Product {
+  id: String
+  name: String
+  price: Float
+  description: String
+  stock: Float
+  category: Category
+  provider: Provider
+  rating: Float
+  discount: Float
+  image: String
+}
+
+type Customer {
+  id: String
+  name: String
+  phone: String
+  identification: String
+  user: String
+}
+
+type User {
+  id: String
+  name: String
+  email: String
+  phone: String
+}
+
+type PaymentMethod {
+  id: String
+  giftCardNumber: String
+  giftCardAmount: Float
+  paymentMethod: String
+  creditCardNumber: String
+  creditCardName: String
+  creditCardExpirationDate: String
+  creditCardCVC: String
+  user: String
+  giftCardStatus: String
+}
+
+type ProductsRequested {
+  product: Product
+  quantity: Float
+}
+
+type SellsEntity {
+  id: String
+  address: String
+  zipCode: String
+  contactPhone: String
+  city: String
+  paymentMethod: PaymentMethod
+  customer: Customer
+  products: [ProductsRequested!]
+}
+
+type Query {
+  countries: [Country!]!
+  categories: [Category!]!
+  providers: [Provider!]!
+  products: [Product!]!
+  productsByCategory(category: String!): [Product!]!
+  login(data: UserInput!): User!
+  paymentMethods(id: String!): [PaymentMethod!]!
+  getSellsByCustomerId(customerId: String!): [SellsEntity!]!
+}
+
+input UserInput {
+  name: String
+  email: String
+  password: String
+  phone: String
+  role: String
+}
+
+type Mutation {
+  insertCountries(data: CountryInput!): Boolean!
+  createCategory(data: CategoryInput!): Boolean!
+  insertProvider(data: ProviderInput!): Boolean!
+  insertProduct(data: ProductInput!): Boolean!
+  deleteProduct(id: String!): Boolean!
+  singup(data: UserInput!): Boolean!
+  modifyUser(data: UserInput!): Boolean!
+  createCustomer(data: CustomerInput!): Customer!
+  insertCreditCard(data: CardInput!): Boolean!
+  insertDebitCard(data: CardInput!): Boolean!
+  insertGiftCard(data: GiftCardCreationInput!): Boolean!
+  registerGiftCard(data: GiftCardResgitrationInput!): Boolean!
+  createSell(sell: SellInput!): Boolean!
+}
+
+input CountryInput {
+  name: String
+  states: [StateInput!]
+}
+
+input StateInput {
+  name: String
+  cities: [CityInput!]
+}
+
+input CityInput {
+  name: String
+}
+
+input CategoryInput {
+  name: String
+  description: String
+}
+
+input ProviderInput {
+  name: String
+  email: String
+  phone: String
+  description: String
+  country: String
+}
+
+input ProductInput {
+  name: String
+  price: Float
+  description: String
+  stock: Float
+  category: String
+  provider: String
+  rating: Float
+  discount: Float
+  image: String
+}
+
+input CustomerInput {
+  name: String
+  phone: String
+  identification: String
+  user: String
+}
+
+input CardInput {
+  creditCardName: String
+  creditCardNumber: String
+  creditCardExpirationDate: String
+  creditCardCVC: String
+  user: String
+}
+
+input GiftCardCreationInput {
+  giftCardAmount: Float
+}
+
+input GiftCardResgitrationInput {
+  giftCardNumber: String
+  user: String
+}
+
+input SellInput {
+  address: String!
+  zipCode: String!
+  contactPhone: String!
+  city: String!
+  paymentMethod: String!
+  products: [ProductInputSell!]!
+  customer: String!
+}
+
+input ProductInputSell {
+  product: String!
+  quantity: Float!
+}

@@ -1,0 +1,36 @@
+<div class="full-container">
+    <div class="title">
+        <p>
+            Select a category to browse amazing products.
+        </p>
+    </div>
+    <div class="w-full df ai-center jc-center">
+
+        <p-floatlabel variant="in">
+            <p-select placeholder="ejm. Smartphones" (onChange)="getProductsByCategory()" [(ngModel)]="currentCategory"
+                inputId="over_label" [options]="categories" optionLabel="name" styleClass="w-full" />
+            <label for="over_label">Select a category</label>
+        </p-floatlabel>
+
+    </div>
+
+    <p-divider></p-divider>
+
+
+    <p-data-view [value]="products">
+        <ng-template #list let-items>
+            <div *ngFor="let product of products" class="products-container">
+                <div class="card">
+                    <img [src]="product.image" alt="product.name" />
+                    <div class="card-content">
+                        <h2>{{product.name}}</h2>
+                        <p>{{product.price}}</p>
+                        <p-button label="Add to cart" icon="pi pi-shopping-cart" (onClick)="openProductView(product)"></p-button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+    </p-data-view>
+</div>
+

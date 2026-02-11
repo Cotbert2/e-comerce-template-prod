@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.df {
+    display: flex;
+}
+
+.jc-center {
+    justify-content: center;
+}
+
+.ai-center{
+    align-items: center;
+}
+
+.jc-space-between {
+    justify-content: space-between;
+}
+
+.ta-center{
+    text-align: center;
+}

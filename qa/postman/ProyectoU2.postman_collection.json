@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "d31412a2-864a-48a3-85d9-ceae2f36c441",
+		"name": "ProyectoU2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50753684",
+		"_collection_link": "https://carlosis2004-3226611.postman.co/workspace/%C3%91ato-Caiza-Carlos-Isaac-'s-Work~2bca7dcd-7b1e-4914-8495-59a110804e0c/collection/50753684-d31412a2-864a-48a3-85d9-ceae2f36c441?action=share&source=collection_link&creator=50753684"
+	},
+	"item": [
+		{
+			"name": "Descubrimiento del Esquema",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  insertProduct(data: {\n    name: \"Producto de Prueba JMeter\",\n    price: 25.50,\n    description: \"Probando el rendimiento de inserción\",\n    stock: 100,\n    category: \"6948c5a9de1a179cf7a5eb13\",\n    provider: \"6948c5a9de1a179cf7a5eb1a\",\n    rating: 5,\n    discount: 15,\n    image: \"https://hp.widen.net/content/thevlwgq4c/png/thevlwgq4c.png?w=800&h=600&dpi=72&color=ffffff00\"\n  })\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NoSQL Injection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  singup(data: {\n    name: \"User Test\",\n    email: \"test${__Random(1,99999)}@correo.com\",\n    password: \"password123\",\n    phone: \"0987654321\",\n    role: \"customer\"\n  })\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inyección de Script",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n  products {\n    name\n    category { name }\n    provider { name country }\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Denegación de Servicio",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  createSell(sell: {\n    address: \"Av. Amazonas y Naciones Unidas\",\n    zipCode: \"170501\",\n    contactPhone: \"0998887776\",\n    city: \"6949a6a9aed888c2439e4336\",         # Obtenido de la consulta 'countries'\n    paymentMethod: \"6949baac3e08bcbdeed74be4\", # Obtenido en el flujo 2\n    customer: \"ID_DEL_CUSTOMER\",     # Obtenido en el flujo 2\n    products: [\n      { product: \"6949a6a9aed888c2439e4366\", quantity: 1 },\n      { product: \"6949a6a9aed888c2439e4367\", quantity: 1 }\n    ]\n  })\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fuzzing de Enumeración",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n  createSell(sell: {\n    address: \"Av. Amazonas y Naciones Unidas\",\n    zipCode: \"170501\",\n    contactPhone: \"0998887776\",\n    city: \"6949a6a9aed888c2439e4336\",         # Obtenido de la consulta 'countries'\n    paymentMethod: \"6949baac3e08bcbdeed74be4\", # Obtenido en el flujo 2\n    customer: \"ID_DEL_CUSTOMER\",     # Obtenido en el flujo 2\n    products: [\n      { product: \"6949a6a9aed888c2439e4366\", quantity: 1 },\n      { product: \"6949a6a9aed888c2439e4367\", quantity: 1 }\n    ]\n  })\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

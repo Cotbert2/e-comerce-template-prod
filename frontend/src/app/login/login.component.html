@@ -1,0 +1,69 @@
+<div class="w-100 df ai-center jc-center full-container">
+    <p-panel class="panel-input">
+        <div *ngIf="logedUserData.id">
+            <h3>
+                You are alredy Logged in
+            </h3>
+            <div class="width-100 df ai-center jc-space-between ">
+
+                <p-button severity="danger" label="Log out" (onClick)="handleLogOut()" ></p-button>
+            </div>
+        </div>
+
+        <div *ngIf="!logedUserData.id">
+            <h3>Let's Create something cool!</h3>
+    
+            <p-floatlabel *ngIf="!isLogin" variant="in">
+                <input pInputText id="name" autocomplete="off" [(ngModel)]="name" />
+                <label for="name">
+                    <i class="pi pi-pen-to-square"></i>
+                    {{'Your Full Name'}}</label>
+            </p-floatlabel>
+    
+            <p-floatlabel variant="in">
+                <input pInputText id="email" autocomplete="off" [(ngModel)]="email"/>
+                <label for="email">
+                    <i class="pi pi-envelope"></i>
+                    {{'Your em@il'}}</label>
+            </p-floatlabel>
+    
+    
+            <p-floatlabel *ngIf="!isLogin" variant="in">
+                <input pInputText id="phone" autocomplete="off" [(ngModel)]="phone"/>
+                <label for="phone">
+                    <i class="pi pi-phone"></i>
+                    {{'Your phone'}}</label>
+            </p-floatlabel>
+    
+    
+    
+            <p-floatlabel variant="in">
+                <input pInputText id="pass1" type="password" autocomplete="off" [(ngModel)]="password"/>
+                <label for="pass1">
+                    <i class="pi pi-eye"></i>
+                    {{'Your password'}}</label>
+            </p-floatlabel>
+    
+    
+            <p-floatlabel  *ngIf="!isLogin"  variant="in">
+                <input pInputText type="password" id="pass2" autocomplete="off" [(ngModel)]="confirmPassword"/>
+                <label for="pass2">
+                    <i class="pi pi-eye"></i>
+                    {{'Repeat password'}}</label>
+            </p-floatlabel>
+
+            <div *ngIf="!isLogin" class="df ai-center jc-space-between">
+                <p-button (onClick)="handleSignUp()">Sign me Up</p-button>
+                <p-button (onClick)="switchToSignUp()">Login Instead</p-button>
+            </div>
+
+
+            <div *ngIf="isLogin" class="df ai-center jc-space-between">
+                <p-button (onClick)="handleLogIn()">LogIn Up</p-button>
+                <p-button (onClick)="switchToSignUp()">Sign up Instead</p-button>
+            </div>
+
+        </div>
+
+    </p-panel>
+</div>
