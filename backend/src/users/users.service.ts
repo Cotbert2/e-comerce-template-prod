@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { Customer, User } from './../core/domain/schemas/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { MD5 } from 'crypto-js';
+import { hashPassword } from './hash-password';
 
 
 @Injectable()
@@ -24,7 +24,7 @@ export class UsersService {
 
         //hash passwd
 
-        data.password = MD5(data.password).toString().toString();
+        data.password = hashPassword(data.password);
 
         const newUser = new this.userRepository(data);
         const mongoResponse = await newUser.save();
@@ -38,7 +38,7 @@ export class UsersService {
 
         //hash passwd
 
-        data.password = MD5(data.password).toString().toString();
+        data.password = hashPassword(data.password);
 
         const user = await this.userRepository.findOne({email: data.email, password: data.password});
         console.log(user);
@@ -49,7 +49,7 @@ export class UsersService {
 
     public async modifyUser(data : any){
         if (data.password) {
-            data.password = MD5(data.password).toString();
+            data.password = hashPassword(data.password);
         } else {
             delete data.password;
         }
