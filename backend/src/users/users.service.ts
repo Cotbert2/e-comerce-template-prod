@@ -54,10 +54,10 @@ export class UsersService {
             delete data.password;
         }
 
-        const user = await this.userRepository.updateOne({email: data.email}, data);
-        console.log(user);
+        const result = await this.userRepository.updateOne({email: data.email}, data);
+        console.log(result);
 
-        if (user) return true;
+        if (result.matchedCount > 0) return true;
         return false;
     }
 

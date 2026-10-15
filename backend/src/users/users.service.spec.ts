@@ -95,14 +95,49 @@ describe('UsersService', () => {
 
   // ---------------- MODIFY USER ----------------
   describe('modifyUser', () => {
-    it('should return true if update succeeds', async () => {
-      mockUserModel.updateOne.mockResolvedValue({ acknowledged: true });
+    it('should return true when a user matches the email', async () => {
+      mockUserModel.updateOne.mockResolvedValue({
+        acknowledged: true,
+        matchedCount: 1,
+        modifiedCount: 1,
+      });
 
       const result = await service.modifyUser({
         email: 'test@mail.com',
+        name: 'New Name',
       });
 
       expect(result).toBe(true);
+    });
+
+    it('should return true when the user exists but the data is unchanged', async () => {
+      mockUserModel.updateOne.mockResolvedValue({
+        acknowledged: true,
+        matchedCount: 1,
+        modifiedCount: 0,
+      });
+
+      const result = await service.modifyUser({
+        email: 'test@mail.com',
+        name: 'Same Name',
+      });
+
+      expect(result).toBe(true);
+    });
+
+    it('should return false when no user matches the email', async () => {
+      mockUserModel.updateOne.mockResolvedValue({
+        acknowledged: true,
+        matchedCount: 0,
+        modifiedCount: 0,
+      });
+
+      const result = await service.modifyUser({
+        email: 'missing@mail.com',
+        name: 'New Name',
+      });
+
+      expect(result).toBe(false);
     });
 
     it('should store the new password so that login with it matches', async () => {
