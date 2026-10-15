@@ -104,6 +104,49 @@ describe('UsersService', () => {
 
       expect(result).toBe(true);
     });
+
+    it('should store the new password so that login with it matches', async () => {
+      mockUserModel.updateOne.mockResolvedValue({
+        acknowledged: true,
+        matchedCount: 1,
+      });
+      mockUserModel.findOne.mockResolvedValue(null);
+
+      await service.modifyUser({
+        email: 'test@mail.com',
+        password: 'new-password',
+      });
+      await service.login({
+        email: 'test@mail.com',
+        password: 'new-password',
+      });
+
+      const storedPassword = mockUserModel.updateOne.mock.calls[0][1].password;
+      const loginPassword = mockUserModel.findOne.mock.calls[0][0].password;
+
+      expect(storedPassword).not.toBe('new-password');
+      expect(storedPassword).toBe(loginPassword);
+    });
+
+    it.each([undefined, null, ''])(
+      'should not overwrite the password when it is %p',
+      async (password) => {
+        mockUserModel.updateOne.mockResolvedValue({
+          acknowledged: true,
+          matchedCount: 1,
+        });
+
+        await service.modifyUser({
+          email: 'test@mail.com',
+          name: 'New Name',
+          password,
+        });
+
+        expect(mockUserModel.updateOne.mock.calls[0][1]).not.toHaveProperty(
+          'password',
+        );
+      },
+    );
   });
 
   // ---------------- CREATE CUSTOMER ----------------

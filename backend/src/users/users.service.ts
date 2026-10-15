@@ -48,6 +48,12 @@ export class UsersService {
 
 
     public async modifyUser(data : any){
+        if (data.password) {
+            data.password = MD5(data.password).toString();
+        } else {
+            delete data.password;
+        }
+
         const user = await this.userRepository.updateOne({email: data.email}, data);
         console.log(user);
 
